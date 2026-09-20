@@ -46,8 +46,6 @@ export async function action({ request }: Route.ActionArgs) {
 
   if (!status) return { message } // session.flash("error", errors)
 
-  session.set("token", data.token)
-
   return redirect("/new-point", {
     headers: {
       "Set-Cookie": await commitSession(session),
@@ -88,6 +86,11 @@ export default function SignIn({ actionData, loaderData }: Route.ComponentProps)
         <fieldset className="mt-10">
           {fetcher.data?.errors && (
             <p className="bg-red-100 p-2 rounded-md text-center text-red-500 mb-5">{fetcher.data.errors}</p>
+          )}
+          {fetcher.data?.message && (
+            <p className="bg-red-100 p-2 rounded-md text-center text-red-500 mb-5">
+              {fetcher.data.message}
+            </p>
           )}
           <legend className="mb-5">
             <h2 className="text-[#322153] text-[24px] font-bold">Login</h2>
