@@ -46,6 +46,8 @@ export async function action({ request }: Route.ActionArgs) {
 
   if (!status) return { message } // session.flash("error", errors)
 
+  session.set("token", data.token)
+
   return redirect("/new-point", {
     headers: {
       "Set-Cookie": await commitSession(session),
